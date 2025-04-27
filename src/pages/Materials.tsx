@@ -56,15 +56,23 @@ const Materials = () => {
   const materials = [
     {
       id: 1,
-      title: "Основы стойки в самбо",
-      description: "Изучение правильной стойки и положения тела для эффективной борьбы.",
+      title: "Основатели самбо в России",
+      description: "История создания самбо и биографии трех великих основателей: Спиридонова В.А., Ощепкова В.С. и Харлампиева А.А.",
       category: "Теория",
-      image: "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2142&auto=format&fit=crop",
+      image: "https://cdn.poehali.dev/files/995ba6be-fcf4-4237-a275-87a5b8eab6ac.png",
       type: "theory",
       isNew: true
     },
     {
       id: 2,
+      title: "Основы стойки в самбо",
+      description: "Изучение правильной стойки и положения тела для эффективной борьбы.",
+      category: "Теория",
+      image: "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2142&auto=format&fit=crop",
+      type: "theory"
+    },
+    {
+      id: 3,
       title: "Техника задней подножки",
       description: "Подробный разбор одного из основных приемов самбо с пошаговой демонстрацией.",
       category: "Техника бросков",
@@ -72,7 +80,7 @@ const Materials = () => {
       type: "technique"
     },
     {
-      id: 3,
+      id: 4,
       title: "Видеоурок: защита от захвата",
       description: "Практический урок по защите от разных типов захватов с разбором ошибок.",
       category: "Видеоматериалы",
@@ -80,7 +88,7 @@ const Materials = () => {
       type: "video"
     },
     {
-      id: 4,
+      id: 5,
       title: "Правила соревнований по самбо",
       description: "Обзор основных правил и регламента соревнований по спортивному самбо.",
       category: "Теория",
@@ -88,7 +96,7 @@ const Materials = () => {
       type: "theory"
     },
     {
-      id: 5,
+      id: 6,
       title: "Бросок через бедро",
       description: "Техника выполнения броска через бедро с разбором типичных ошибок начинающих.",
       category: "Техника бросков",
@@ -96,7 +104,7 @@ const Materials = () => {
       type: "technique"
     },
     {
-      id: 6,
+      id: 7,
       title: "Мастер-класс от чемпиона",
       description: "Эксклюзивный видеоурок от чемпиона России по самбо с демонстрацией приемов.",
       category: "Видеоматериалы",
