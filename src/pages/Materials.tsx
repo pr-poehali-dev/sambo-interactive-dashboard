@@ -7,8 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  SidebarProvider, 
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
   Sidebar, 
   SidebarHeader, 
   SidebarContent, 
