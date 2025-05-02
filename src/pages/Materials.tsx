@@ -7,10 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
+import { 
+  SidebarProvider, 
   Sidebar, 
   SidebarHeader, 
   SidebarContent, 
@@ -127,8 +125,12 @@ const Materials = () => {
         <Sidebar className="border-r border-sidebar-border">
           <SidebarHeader className="py-4">
             <div className="flex items-center px-2">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground mr-2">
-                <BookMarked size={18} />
+              <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
+                <img 
+                  src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" 
+                  alt="Самбо эмблема" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h2 className="text-lg font-bold">Самбо-Интерактив</h2>
@@ -178,19 +180,14 @@ const Materials = () => {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-
-          <SidebarHeader className="py-4">
-            <div className="flex items-center px-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
-                <img src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" alt="Самбо эмблема" className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <h2 className="text-lg font-bold">Самбо-Интерактив</h2>
-              </div>
-              <SidebarTrigger className="ml-auto" />
-            </div>
-          </SidebarHeader>
-
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Челленджи и награды">
+                  <Link to="/challenges" className="flex items-center">
+                    <BookOpen size={20} className="mr-2" />
+                    <span>Челленджи и награды</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
         </Sidebar>
