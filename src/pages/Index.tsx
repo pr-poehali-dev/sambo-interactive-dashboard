@@ -8,7 +8,8 @@ import {
   Medal, 
   TrendingUp, 
   User, 
-  Calendar 
+  Calendar,
+  Trophy 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,8 +38,8 @@ const Index = () => {
         <Sidebar className="border-r border-sidebar-border">
           <SidebarHeader className="py-4">
             <div className="flex items-center px-2">
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground mr-2">
-                <User size={18} />
+              <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
+                <img src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" alt="Самбо эмблема" className="w-full h-full object-contain" />
               </div>
               <div>
                 <h2 className="text-lg font-bold">Самбо-Интерактив</h2>
@@ -61,6 +62,14 @@ const Index = () => {
                   <Link to="/materials" className="flex items-center">
                     <BookOpen size={20} className="mr-2" />
                     <span>Учебные материалы</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Тесты знаний">
+                  <Link to="/tests" className="flex items-center">
+                    <Trophy size={20} className="mr-2" />
+                    <span>Тесты знаний</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -181,6 +190,39 @@ const Index = () => {
                     </div>
                   </div>
                 </CardContent>
+              </Card>
+            </div>
+
+            {/* Блок с навигацией на основные разделы */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow border-purple-200 hover:border-primary cursor-pointer">
+                <Link to="/materials" className="block h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full">
+                    <BookOpen size={40} className="text-primary mb-4" />
+                    <h3 className="font-bold text-lg mb-2">Учебные материалы</h3>
+                    <p className="text-sm text-muted-foreground">Изучай теорию и технику самбо</p>
+                  </CardContent>
+                </Link>
+              </Card>
+              
+              <Card className="shadow-lg hover:shadow-xl transition-shadow border-purple-200 hover:border-primary cursor-pointer">
+                <Link to="/tests" className="block h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full">
+                    <Trophy size={40} className="text-primary mb-4" />
+                    <h3 className="font-bold text-lg mb-2">Тесты знаний</h3>
+                    <p className="text-sm text-muted-foreground">Проверь, что ты усвоил, и получи награды</p>
+                  </CardContent>
+                </Link>
+              </Card>
+              
+              <Card className="shadow-lg hover:shadow-xl transition-shadow border-purple-200 hover:border-primary cursor-pointer">
+                <Link to="/videos" className="block h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full">
+                    <Video size={40} className="text-primary mb-4" />
+                    <h3 className="font-bold text-lg mb-2">Видеозадания</h3>
+                    <p className="text-sm text-muted-foreground">Смотри и выполняй видеоупражнения</p>
+                  </CardContent>
+                </Link>
               </Card>
             </div>
           </div>
