@@ -1,104 +1,133 @@
 
-import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { PersonalInfo } from "@/components/profile/PersonalInfo";
+import { ProgressStats } from "@/components/profile/ProgressStats";
+import { Achievements } from "@/components/profile/Achievements";
+import { CoachInfo } from "@/components/profile/CoachInfo";
 import PageContainer from "@/components/layout/PageContainer";
-import ProfileAvatar from "@/components/profile/ProfileAvatar";
-import PersonalInfo from "@/components/profile/PersonalInfo";
-import CoachInfo from "@/components/profile/CoachInfo";
-import ProgressStats from "@/components/profile/ProgressStats";
-import Achievements from "@/components/profile/Achievements";
-import { Card, CardContent } from "@/components/ui/card";
 
-const Profile = () => {
-  const [profileStats] = useState({
-    name: "Алексей Алексеев",
-    age: "10 лет 6 месяцев",
-    achievementPoints: 320,
-    completedTests: 15,
-    completedVideos: 8,
-    studyMaterials: 22,
-  });
-
-  const progressItems = [
-    { label: "Общий прогресс", value: 65 },
-    { label: "Теоретические знания", value: 80 },
-    { label: "Практические навыки", value: 55 },
-  ];
-
-  const statsItems = [
-    { label: "Пройдено тестов", value: profileStats.completedTests },
-    { label: "Видеозаданий", value: profileStats.completedVideos },
-    { label: "Материалов изучено", value: profileStats.studyMaterials },
-  ];
-
-  const awards = [
-    { icon: "🥇", bgColor: "bg-yellow-100", textColor: "text-yellow-500", name: "Первый бросок" },
-    { icon: "🔥", bgColor: "bg-blue-100", textColor: "text-blue-500", name: "3 дня подряд" },
-    { icon: "📚", bgColor: "bg-green-100", textColor: "text-green-500", name: "Теория усвоена" },
-  ];
-
-  const physicalSkills = [
-    { name: "Отжимания", rating: 3 },
-    { name: "Подтягивания", rating: 2 },
-    { name: "Гибкость", rating: 4 },
-  ];
-
-  const technicalSkills = [
-    { name: "Падения", rating: 4 },
-    { name: "Броски", rating: 3 },
-    { name: "Удержания", rating: 2 },
-  ];
-
+const ProfileAvatar = () => {
   return (
-    <PageContainer 
-      title="Мой профиль" 
-      subtitle="Персональная информация и достижения"
-      activePath="/profile"
-    >
-      {/* Профиль пользователя и основная информация */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <Card className="shadow-lg hover:shadow-xl transition-shadow border-purple-200">
-          <CardContent className="p-6">
-            <ProfileAvatar 
-              name={profileStats.name} 
-              age={profileStats.age} 
-              photoUrl="https://images.unsplash.com/photo-1618841557871-b4664fbf0cb3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2FtYm8lMjBib3l8ZW58MHx8MHx8fDA%3D" 
-            />
-          </CardContent>
-        </Card>
-        
-        <div className="lg:col-span-2">
-          <PersonalInfo 
-            name={profileStats.name} 
-            age={profileStats.age}
-          />
+    <div className="flex flex-col items-center">
+      <Avatar className="h-28 w-28 border-4 border-primary">
+        <AvatarImage src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=2070&auto=format&fit=crop" alt="Алексей" />
+        <AvatarFallback>АИ</AvatarFallback>
+      </Avatar>
+      <div className="mt-4 text-center">
+        <h2 className="text-2xl font-bold">Алексей Иванов</h2>
+        <p className="text-muted-foreground">Группа: Юниоры-2</p>
+        <div className="flex justify-center space-x-2 mt-2">
+          <Badge variant="outline" className="bg-blue-100 hover:bg-blue-200">10 лет</Badge>
+          <Badge variant="outline" className="bg-green-100 hover:bg-green-200">Начинающий</Badge>
         </div>
       </div>
-      
-      {/* Мой тренер */}
-      <div className="mb-8">
-        <CoachInfo 
-          name="Иванов Петр Сергеевич" 
-          title="Мастер спорта по самбо" 
-          rating={5} 
-          photoUrl="https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2FtYm8lMjBjb2FjaHxlbnwwfHwwfHx8MA%3D%3D" 
-        />
-      </div>
-      
-      {/* Статистика и достижения */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ProgressStats 
-          progressItems={progressItems} 
-          statsItems={statsItems} 
-        />
-        
-        <Achievements 
-          awards={awards} 
-          physicalSkills={physicalSkills} 
-          technicalSkills={technicalSkills} 
-        />
-      </div>
-    </PageContainer>
+    </div>
   );
 };
 
-export default Profile;
+export default function Profile() {
+  return (
+    <PageContainer
+      title="Личный профиль"
+      subtitle="Управляй своим профилем и отслеживай прогресс"
+      activePath="/profile"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Левая колонка с аватаром и карточкой */}
+        <div className="space-y-6">
+          <Card className="overflow-hidden border-purple-200">
+            <CardContent className="pt-6">
+              <ProfileAvatar />
+            </CardContent>
+          </Card>
+          
+          <Card className="border-purple-200">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl">Моя программа</CardTitle>
+              <CardDescription>Твой текущий уровень подготовки</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between mb-2">
+                <div className="font-semibold">Начинающий самбист</div>
+                <Badge className="bg-primary">Уровень 2</Badge>
+              </div>
+              <div className="w-full bg-muted rounded-full h-2.5 mb-4">
+                <div className="bg-primary h-2.5 rounded-full" style={{ width: "65%" }}></div>
+              </div>
+              <p className="text-muted-foreground text-sm mb-3">
+                До следующего уровня осталось пройти 3 темы и сдать 2 теста.
+              </p>
+              <Button className="w-full">Посмотреть программу</Button>
+            </CardContent>
+          </Card>
+          
+          <Card className="border-purple-200">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl">Мой тренер</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CoachInfo />
+            </CardContent>
+          </Card>
+        </div>
+      
+        {/* Правая колонка с основной информацией */}
+        <div className="lg:col-span-2">
+          <Tabs defaultValue="info" className="w-full">
+            <TabsList className="mb-6 bg-blue-100/50 border border-purple-200">
+              <TabsTrigger value="info" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Личная информация
+              </TabsTrigger>
+              <TabsTrigger value="progress" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Прогресс
+              </TabsTrigger>
+              <TabsTrigger value="achievements" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Достижения
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="info">
+              <Card className="border-purple-200">
+                <CardHeader className="pb-2">
+                  <CardTitle>Личная информация</CardTitle>
+                  <CardDescription>Основные данные профиля</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <PersonalInfo />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="progress">
+              <Card className="border-purple-200">
+                <CardHeader className="pb-2">
+                  <CardTitle>Прогресс обучения</CardTitle>
+                  <CardDescription>Твои успехи в изучении самбо</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ProgressStats />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="achievements">
+              <Card className="border-purple-200">
+                <CardHeader className="pb-2">
+                  <CardTitle>Достижения</CardTitle>
+                  <CardDescription>Твои награды и достижения</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Achievements />
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+    </PageContainer>
+  );
+}

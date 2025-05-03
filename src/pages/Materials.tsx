@@ -1,7 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { BookOpen, PlayCircle, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -49,7 +48,7 @@ const Materials = () => {
       title: "Основатели самбо в России",
       description: "История создания самбо и биографии трех великих основателей: Спиридонова В.А., Ощепкова В.С. и Харлампиева А.А.",
       category: "Теория",
-      image: "https://cdn.poehali.dev/files/995ba6be-fcf4-4237-a275-87a5b8eab6ac.png",
+      image: "https://images.unsplash.com/photo-1581617427892-467e4702f03d?q=80&w=2070&auto=format&fit=crop",
       type: "theory",
       isNew: true
     },

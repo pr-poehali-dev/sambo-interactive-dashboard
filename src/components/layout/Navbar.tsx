@@ -2,17 +2,16 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
+  Home,
   User,
   BookOpen,
   Video,
   MessageCircle,
-  Medal,
+  Award,
   TrendingUp,
   Trophy,
   Menu,
-  X
 } from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -32,11 +31,9 @@ interface NavbarProps {
 }
 
 export function Navbar({ activePath }: NavbarProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const navLinks: NavLink[] = [
     { 
-      icon: <User size={18} className="mr-1" />, 
+      icon: <Home size={18} className="mr-1" />, 
       text: "Главная", 
       path: "/", 
       active: activePath === "/"
@@ -49,7 +46,7 @@ export function Navbar({ activePath }: NavbarProps) {
     },
     { 
       icon: <BookOpen size={18} className="mr-1" />, 
-      text: "Учебные материалы", 
+      text: "Материалы", 
       path: "/materials", 
       active: activePath === "/materials"
     },
@@ -78,7 +75,7 @@ export function Navbar({ activePath }: NavbarProps) {
       active: activePath === "/messages"
     },
     { 
-      icon: <Medal size={18} className="mr-1" />, 
+      icon: <Award size={18} className="mr-1" />, 
       text: "Награды", 
       path: "/challenges", 
       active: activePath === "/challenges"
@@ -98,7 +95,7 @@ export function Navbar({ activePath }: NavbarProps) {
                 className="w-full h-full object-contain" 
               />
             </div>
-            <span className="font-bold text-lg hidden md:block">Самбо-Интерактив</span>
+            <span className="font-bold text-lg hidden md:inline-block text-primary">Самбо-Интерактив</span>
           </div>
           
           {/* Десктопное меню */}
@@ -129,19 +126,29 @@ export function Navbar({ activePath }: NavbarProps) {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[250px] sm:w-[300px] pt-10">
-                <nav className="flex flex-col gap-2 mt-4">
+                <div className="flex items-center gap-2 mb-8">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img 
+                      src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" 
+                      alt="Самбо эмблема" 
+                      className="w-full h-full object-contain" 
+                    />
+                  </div>
+                  <span className="font-bold text-lg text-primary">Самбо-Интерактив</span>
+                </div>
+                <nav className="flex flex-col gap-2">
                   {navLinks.map((link, index) => (
                     <Link 
                       key={index}
                       to={link.path}
-                      className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors
+                      className={`flex items-center px-4 py-3 text-base rounded-md transition-colors
                         ${link.active 
                           ? 'bg-primary text-white font-medium'
                           : 'hover:bg-primary/10 text-gray-700'
                         }`}
                     >
                       {link.icon}
-                      <span>{link.text}</span>
+                      <span className="ml-2">{link.text}</span>
                     </Link>
                   ))}
                 </nav>

@@ -1,55 +1,91 @@
 
-import { CalendarDays, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
-const trainings = [
-  {
-    id: 1,
-    date: "Сегодня, 27 апреля",
-    time: "16:00 - 17:30",
-    location: "Спортзал «Олимпиец»"
-  },
-  {
-    id: 2,
-    date: "Среда, 1 мая",
-    time: "15:30 - 17:00",
-    location: "Спортзал «Олимпиец»"
-  },
-  {
-    id: 3,
-    date: "Пятница, 3 мая",
-    time: "16:00 - 17:30",
-    location: "Спортзал «Олимпиец»"
-  }
-];
+interface TrainingEvent {
+  id: number;
+  day: string;
+  time: string;
+  title: string;
+  location: string;
+  trainer: string;
+  isUpcoming: boolean;
+}
 
-export const TrainingSchedule = () => {
+export function TrainingSchedule() {
+  const trainings: TrainingEvent[] = [
+    {
+      id: 1,
+      day: "Понедельник",
+      time: "16:30 - 18:00",
+      title: "Техника бросков",
+      location: "Зал №2",
+      trainer: "Андрей Петрович",
+      isUpcoming: true
+    },
+    {
+      id: 2,
+      day: "Среда",
+      time: "17:00 - 18:30",
+      title: "Отработка захватов",
+      location: "Зал №1",
+      trainer: "Сергей Михайлович",
+      isUpcoming: false
+    },
+    {
+      id: 3,
+      day: "Пятница",
+      time: "16:30 - 18:00",
+      title: "Спарринги",
+      location: "Зал №2",
+      trainer: "Андрей Петрович",
+      isUpcoming: false
+    },
+  ];
+
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {trainings.map((training, index) => (
         <div key={training.id}>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-2">
-            <div className="flex items-center mb-2 sm:mb-0">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${index === 0 ? 'bg-primary/20 text-primary' : 'bg-muted'}`}>
-                <CalendarDays size={20} />
-              </div>
+          <div className={`p-3 rounded-lg ${training.isUpcoming ? 'bg-primary/10 border border-primary/20' : 'bg-background'}`}>
+            <div className="flex items-start justify-between">
               <div>
-                <h3 className={`font-semibold ${index === 0 ? 'text-primary' : ''}`}>{training.date}</h3>
+                <h3 className="font-medium text-base">
+                  {training.title}
+                  {training.isUpcoming && <span className="text-xs ml-2 bg-primary text-white py-0.5 px-1.5 rounded-full">Ближайшая</span>}
+                </h3>
+                <div className="text-sm text-muted-foreground">{training.trainer}</div>
+              </div>
+              <div className="text-right">
+                <div className="flex items-center text-sm font-medium">
+                  <Calendar className="h-4 w-4 mr-1 text-primary" />
+                  {training.day}
+                </div>
                 <div className="flex items-center text-sm text-muted-foreground mt-1">
-                  <Clock className="mr-1 h-4 w-4" />
-                  <span>{training.time}</span>
+                  <Clock className="h-4 w-4 mr-1" />
+                  {training.time}
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center sm:flex-shrink-0 ml-10 sm:ml-0 text-sm">
-              <MapPin className="h-4 w-4 mr-1 text-muted-foreground" />
-              <span className="text-muted-foreground">{training.location}</span>
+            <div className="mt-2 flex items-center text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4 mr-1" />
+              {training.location}
             </div>
+            
+            {training.isUpcoming && (
+              <div className="mt-3">
+                <Button size="sm" className="w-full">Записаться</Button>
+              </div>
+            )}
           </div>
-          {index < trainings.length - 1 && <Separator />}
+          
+          {index < trainings.length - 1 && <Separator className="my-3" />}
         </div>
       ))}
     </div>
   );
-};
+}
+
+export default TrainingSchedule;
