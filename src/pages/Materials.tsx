@@ -1,23 +1,13 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, PlayCircle, FileText, Search, BookMarked } from "lucide-react";
+import { BookOpen, PlayCircle, Search } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  SidebarProvider, 
-  Sidebar, 
-  SidebarHeader, 
-  SidebarContent, 
-  SidebarMenu, 
-  SidebarMenuItem, 
-  SidebarMenuButton, 
-  SidebarTrigger, 
-  SidebarInset 
-} from "@/components/ui/sidebar";
+import PageContainer from "@/components/layout/PageContainer";
 
 const MaterialCard = ({ title, description, category, image, isNew = false }: { 
   title: string; 
@@ -120,159 +110,78 @@ const Materials = () => {
   );
 
   return (
-    <SidebarProvider>
-      <div className="flex min-h-screen bg-blue-50">
-        <Sidebar className="border-r border-sidebar-border">
-          <SidebarHeader className="py-4">
-            <div className="flex items-center px-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
-                <img 
-                  src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" 
-                  alt="Самбо эмблема" 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div>
-                <h2 className="text-lg font-bold">Самбо-Интерактив</h2>
-              </div>
-              <SidebarTrigger className="ml-auto" />
-            </div>
-          </SidebarHeader>
-          <SidebarContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Главная">
-                  <Link to="/" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Главная</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={true} tooltip="Учебные материалы">
-                  <Link to="/materials" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Учебные материалы</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Видеозадания">
-                  <Link to="/videos" className="flex items-center">
-                    <PlayCircle size={20} className="mr-2" />
-                    <span>Видеозадания</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Мой прогресс">
-                  <Link to="/progress" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Мой прогресс</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Сообщения">
-                  <Link to="/messages" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Сообщения</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Челленджи и награды">
-                  <Link to="/challenges" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Челленджи и награды</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarContent>
-        </Sidebar>
-        
-        <SidebarInset className="bg-gradient-to-br from-blue-50 to-purple-50">
-          <div className="container p-4 md:p-6 mx-auto">
-            <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                Учебные материалы 📚
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Изучай теорию, технику бросков и смотри видеоуроки
-              </p>
-            </div>
-            
-            {/* Поиск по материалам */}
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Поиск материалов..."
-                className="pl-9 bg-white border-purple-200"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            
-            {/* Вкладки по категориям */}
-            <Tabs defaultValue="all" className="mb-6">
-              <TabsList className="mb-4 bg-blue-100/50 border border-purple-200">
-                <TabsTrigger value="all" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Все материалы
-                </TabsTrigger>
-                <TabsTrigger value="theory" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Теория
-                </TabsTrigger>
-                <TabsTrigger value="technique" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Техника бросков
-                </TabsTrigger>
-                <TabsTrigger value="video" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                  Видеоматериалы
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="all" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMaterials.map(material => (
-                    <MaterialCard key={material.id} {...material} />
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="theory" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMaterials
-                    .filter(material => material.type === "theory")
-                    .map(material => (
-                      <MaterialCard key={material.id} {...material} />
-                    ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="technique" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMaterials
-                    .filter(material => material.type === "technique")
-                    .map(material => (
-                      <MaterialCard key={material.id} {...material} />
-                    ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="video" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredMaterials
-                    .filter(material => material.type === "video")
-                    .map(material => (
-                      <MaterialCard key={material.id} {...material} />
-                    ))}
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </SidebarInset>
+    <PageContainer
+      title="Учебные материалы 📚"
+      subtitle="Изучай теорию, технику бросков и смотри видеоуроки"
+      activePath="/materials"
+    >
+      {/* Поиск по материалам */}
+      <div className="relative mb-6">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Input
+          placeholder="Поиск материалов..."
+          className="pl-9 bg-white border-purple-200"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
-    </SidebarProvider>
+      
+      {/* Вкладки по категориям */}
+      <Tabs defaultValue="all" className="mb-6">
+        <TabsList className="mb-4 bg-blue-100/50 border border-purple-200">
+          <TabsTrigger value="all" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            Все материалы
+          </TabsTrigger>
+          <TabsTrigger value="theory" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            Теория
+          </TabsTrigger>
+          <TabsTrigger value="technique" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            Техника бросков
+          </TabsTrigger>
+          <TabsTrigger value="video" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            Видеоматериалы
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="all" className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredMaterials.map(material => (
+              <MaterialCard key={material.id} {...material} />
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="theory" className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredMaterials
+              .filter(material => material.type === "theory")
+              .map(material => (
+                <MaterialCard key={material.id} {...material} />
+              ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="technique" className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredMaterials
+              .filter(material => material.type === "technique")
+              .map(material => (
+                <MaterialCard key={material.id} {...material} />
+              ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="video" className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredMaterials
+              .filter(material => material.type === "video")
+              .map(material => (
+                <MaterialCard key={material.id} {...material} />
+              ))}
+          </div>
+        </TabsContent>
+      </Tabs>
+    </PageContainer>
   );
 };
 

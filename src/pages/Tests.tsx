@@ -1,22 +1,12 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { BookOpen, Trophy, Award, Star, BookMarked, CheckCircle, Timer, Brain, Medal, Crown } from "lucide-react";
+import { BookOpen, Trophy, Award, Star, CheckCircle, Timer, Brain, Medal, Crown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { 
-  SidebarProvider, 
-  Sidebar, 
-  SidebarHeader, 
-  SidebarContent, 
-  SidebarMenu, 
-  SidebarMenuItem, 
-  SidebarMenuButton, 
-  SidebarTrigger, 
-  SidebarInset 
-} from "@/components/ui/sidebar";
+import PageContainer from "@/components/layout/PageContainer";
+import { Link } from "react-router-dom";
 
 // Компонент карточки теста
 const TestCard = ({ 
@@ -187,193 +177,106 @@ const Tests = () => {
   ];
 
   return (
-    <SidebarProvider>
-      <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-        <Sidebar className="border-r border-sidebar-border">
-          <SidebarHeader className="py-4">
-            <div className="flex items-center px-2">
-              <div className="w-10 h-10 rounded-full overflow-hidden mr-2">
-                <img src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" alt="Самбо эмблема" className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <h2 className="text-lg font-bold">Самбо-Интерактив</h2>
-              </div>
-              <SidebarTrigger className="ml-auto" />
-            </div>
-          </SidebarHeader>
-          <SidebarContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Главная">
-                  <Link to="/" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Главная</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Учебные материалы">
-                  <Link to="/materials" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Учебные материалы</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={true} tooltip="Тесты знаний">
-                  <Link to="/tests" className="flex items-center">
-                    <Trophy size={20} className="mr-2" />
-                    <span>Тесты знаний</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Видеозадания">
-                  <Link to="/videos" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Видеозадания</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Мой прогресс">
-                  <Link to="/progress" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Мой прогресс</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Сообщения">
-                  <Link to="/messages" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Сообщения</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Челленджи и награды">
-                  <Link to="/challenges" className="flex items-center">
-                    <BookOpen size={20} className="mr-2" />
-                    <span>Челленджи и награды</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarContent>
-        </Sidebar>
-        
-        <SidebarInset>
-          <div className="container p-4 md:p-6 mx-auto">
-            {/* Заголовок страницы с анимацией */}
-            <div className="mb-8 relative">
-              <div className="absolute -top-6 -right-6 opacity-10 text-9xl animate-bounce">🏆</div>
-              <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2 relative z-10 animate-fade-in">
-                Тесты знаний 🧠
-              </h1>
-              <p className="text-lg text-muted-foreground relative z-10">
-                Проверь свои знания о самбо и получи классные награды!
-              </p>
-            </div>
+    <PageContainer
+      title="Тесты знаний 🧠"
+      subtitle="Проверь свои знания о самбо и получи классные награды!"
+      activePath="/tests"
+    >
+      {/* Эмблема самбо */}
+      <div className="mb-8 flex justify-center">
+        <div className="w-20 h-20 mx-auto">
+          <img 
+            src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" 
+            alt="Самбо эмблема" 
+            className="w-full h-full object-contain bounce-animation"
+          />
+        </div>
+      </div>
 
-            {/* Эмблема самбо */}
-            <div className="mb-8 flex justify-center">
-              <div className="w-20 h-20 mx-auto">
-                <img 
-                  src="https://cdn.poehali.dev/files/baf855b2-c5ad-4663-907b-199d6add808c.png" 
-                  alt="Самбо эмблема" 
-                  className="w-full h-full object-contain bounce-animation"
-                />
-              </div>
+      {/* Достижения пользователя */}
+      <div className="mb-10 bg-gradient-to-r from-blue-100/70 to-purple-100/70 p-4 md:p-6 rounded-xl border border-purple-200">
+        <h2 className="text-xl font-bold text-primary mb-4 flex items-center">
+          <Trophy size={24} className="mr-2 text-yellow-500" />
+          Твои достижения
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <AchievementCard 
+            title="Знаток истории" 
+            icon={<Award size={24} className="text-primary" />}
+            description="Пройди все тесты по истории самбо"
+            progress={40}
+          />
+          <AchievementCard 
+            title="Быстрый ум" 
+            icon={<Timer size={24} className="text-primary" />}
+            description="Пройди 5 тестов менее чем за 3 минуты каждый"
+            progress={20}
+          />
+          <AchievementCard 
+            title="Чемпион знаний" 
+            icon={<Star size={24} className="text-primary" />}
+            description="Набери 100% в 3 сложных тестах подряд"
+            progress={10}
+          />
+        </div>
+      </div>
+      
+      {/* Рейтинг лучших учеников - новый раздел */}
+      <div className="mb-10 bg-gradient-to-r from-yellow-100/70 to-orange-100/70 p-4 md:p-6 rounded-xl border border-yellow-200">
+        <h2 className="text-xl font-bold text-amber-700 mb-4 flex items-center">
+          <Crown size={24} className="mr-2 text-yellow-500" />
+          Лучшие ученики этой недели
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
+            <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold mr-3">1</div>
+            <div className="flex-1">
+              <p className="font-bold">Миша К.</p>
+              <p className="text-xs text-muted-foreground">95 баллов</p>
             </div>
-
-            {/* Достижения пользователя */}
-            <div className="mb-10 bg-gradient-to-r from-blue-100/70 to-purple-100/70 p-4 md:p-6 rounded-xl border border-purple-200">
-              <h2 className="text-xl font-bold text-primary mb-4 flex items-center">
-                <Trophy size={24} className="mr-2 text-yellow-500" />
-                Твои достижения
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <AchievementCard 
-                  title="Знаток истории" 
-                  icon={<Award size={24} className="text-primary" />}
-                  description="Пройди все тесты по истории самбо"
-                  progress={40}
-                />
-                <AchievementCard 
-                  title="Быстрый ум" 
-                  icon={<Timer size={24} className="text-primary" />}
-                  description="Пройди 5 тестов менее чем за 3 минуты каждый"
-                  progress={20}
-                />
-                <AchievementCard 
-                  title="Чемпион знаний" 
-                  icon={<Star size={24} className="text-primary" />}
-                  description="Набери 100% в 3 сложных тестах подряд"
-                  progress={10}
-                />
-              </div>
-            </div>
-            
-            {/* Рейтинг лучших учеников - новый раздел */}
-            <div className="mb-10 bg-gradient-to-r from-yellow-100/70 to-orange-100/70 p-4 md:p-6 rounded-xl border border-yellow-200">
-              <h2 className="text-xl font-bold text-amber-700 mb-4 flex items-center">
-                <Crown size={24} className="mr-2 text-yellow-500" />
-                Лучшие ученики этой недели
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-white font-bold mr-3">1</div>
-                  <div className="flex-1">
-                    <p className="font-bold">Миша К.</p>
-                    <p className="text-xs text-muted-foreground">95 баллов</p>
-                  </div>
-                  <Medal className="text-yellow-500" size={20} />
-                </div>
-                <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold mr-3">2</div>
-                  <div className="flex-1">
-                    <p className="font-bold">Даша П.</p>
-                    <p className="text-xs text-muted-foreground">82 балла</p>
-                  </div>
-                  <Medal className="text-gray-400" size={20} />
-                </div>
-                <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center text-white font-bold mr-3">3</div>
-                  <div className="flex-1">
-                    <p className="font-bold">Саша В.</p>
-                    <p className="text-xs text-muted-foreground">78 баллов</p>
-                  </div>
-                  <Medal className="text-amber-700" size={20} />
-                </div>
-              </div>
-            </div>
-            
-            {/* Список доступных тестов */}
-            <h2 className="text-xl font-bold text-primary mb-4 flex items-center">
-              <BookOpen size={24} className="mr-2" />
-              Доступные тесты
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              {tests.map(test => (
-                <TestCard key={test.id} {...test} />
-              ))}
-            </div>
-
-            {/* Подсказка для детей */}
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 shadow-sm relative overflow-hidden">
-              <div className="absolute -right-4 -bottom-4 opacity-10 text-7xl">🌟</div>
-              <h3 className="font-bold text-yellow-800 flex items-center mb-2 relative z-10">
-                <Star size={18} className="mr-2 text-yellow-500" />
-                Совет будущему чемпиону:
-              </h3>
-              <p className="text-sm text-yellow-700 relative z-10">
-                Перед прохождением теста, не забудь повторить материал в разделе "Учебные материалы". 
-                А если наберёшь больше 90% правильных ответов, получишь специальную награду и призовые баллы!
-              </p>
-            </div>
+            <Medal className="text-yellow-500" size={20} />
           </div>
-        </SidebarInset>
+          <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
+            <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold mr-3">2</div>
+            <div className="flex-1">
+              <p className="font-bold">Даша П.</p>
+              <p className="text-xs text-muted-foreground">82 балла</p>
+            </div>
+            <Medal className="text-gray-400" size={20} />
+          </div>
+          <div className="bg-white rounded-lg p-3 shadow-md flex items-center">
+            <div className="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center text-white font-bold mr-3">3</div>
+            <div className="flex-1">
+              <p className="font-bold">Саша В.</p>
+              <p className="text-xs text-muted-foreground">78 баллов</p>
+            </div>
+            <Medal className="text-amber-700" size={20} />
+          </div>
+        </div>
+      </div>
+      
+      {/* Список доступных тестов */}
+      <h2 className="text-xl font-bold text-primary mb-4 flex items-center">
+        <BookOpen size={24} className="mr-2" />
+        Доступные тесты
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        {tests.map(test => (
+          <TestCard key={test.id} {...test} />
+        ))}
+      </div>
+
+      {/* Подсказка для детей */}
+      <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4 shadow-sm relative overflow-hidden">
+        <div className="absolute -right-4 -bottom-4 opacity-10 text-7xl">🌟</div>
+        <h3 className="font-bold text-yellow-800 flex items-center mb-2 relative z-10">
+          <Star size={18} className="mr-2 text-yellow-500" />
+          Совет будущему чемпиону:
+        </h3>
+        <p className="text-sm text-yellow-700 relative z-10">
+          Перед прохождением теста, не забудь повторить материал в разделе "Учебные материалы". 
+          А если наберёшь больше 90% правильных ответов, получишь специальную награду и призовые баллы!
+        </p>
       </div>
       
       {/* Добавляем стили для анимаций */}
@@ -391,7 +294,7 @@ const Tests = () => {
           }
         }
       `}</style>
-    </SidebarProvider>
+    </PageContainer>
   );
 };
 
