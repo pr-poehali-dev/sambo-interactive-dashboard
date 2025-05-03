@@ -19,7 +19,10 @@ export default defineConfig({
     port: 5173,
     allowedHosts: true,
     hmr: {
-      overlay: false // Disables the error overlay if you only want console errors
-    }
+      clientPort: 443, // Используем SSL порт для WebSocket соединения
+      host: 'preview--sambo-interactive-dashboard.poehali.dev', // Задаем хост для WebSocket 
+      overlay: false // Отключаем оверлей ошибок (по желанию)
+    },
+    cors: true // Включаем CORS для запросов
   },
 });

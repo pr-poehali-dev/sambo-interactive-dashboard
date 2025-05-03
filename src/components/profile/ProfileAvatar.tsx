@@ -1,39 +1,43 @@
-
-import { PenSquare, Camera, Upload } from "lucide-react";
+import { Camera, Settings } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-interface ProfileAvatarProps {
-  name: string;
-  age: string;
-  photoUrl: string;
-}
-
-export function ProfileAvatar({ name, age, photoUrl }: ProfileAvatarProps) {
+export function ProfileAvatar() {
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative mb-4">
-        <Avatar className="w-32 h-32 border-4 border-purple-200">
-          <AvatarImage src={photoUrl} alt={name} />
-          <AvatarFallback>{name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-        </Avatar>
-        <button className="absolute -bottom-1 right-0 bg-primary text-white rounded-full p-2 shadow-md hover:bg-primary/90 transition-colors">
-          <PenSquare size={18} />
-        </button>
+    <div className="relative">
+      <div className="flex flex-col items-center">
+        <div className="relative group">
+          <Avatar className="h-28 w-28 border-4 border-primary">
+            <AvatarImage 
+              src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=2070&auto=format&fit=crop" 
+              alt="Алексей" 
+            />
+            <AvatarFallback>АИ</AvatarFallback>
+          </Avatar>
+          <button className="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+            <Camera size={16} />
+          </button>
+        </div>
+        
+        <div className="mt-4 text-center">
+          <h2 className="text-2xl font-bold">Алексей Иванов</h2>
+          <p className="text-muted-foreground">Группа: Юниоры-2</p>
+          <div className="flex justify-center space-x-2 mt-2">
+            <Badge variant="outline" className="bg-blue-100 hover:bg-blue-200">10 лет</Badge>
+            <Badge variant="outline" className="bg-green-100 hover:bg-green-200">Начинающий</Badge>
+          </div>
+        </div>
       </div>
-      <h2 className="text-xl font-bold text-center mb-1">{name}</h2>
-      <p className="text-muted-foreground text-center mb-4">{age}</p>
       
-      <div className="w-full space-y-4 mt-2">
-        <Button className="w-full flex items-center justify-center gap-2">
-          <Camera size={16} />
-          Добавить фото
-        </Button>
-        <Button variant="outline" className="w-full flex items-center justify-center gap-2">
-          <Upload size={16} />
-          Загрузить видео
-        </Button>
-      </div>
+      <Button 
+        variant="outline" 
+        size="sm" 
+        className="absolute top-0 right-0 p-2 h-8 w-8"
+      >
+        <Settings size={16} />
+        <span className="sr-only">Настройки профиля</span>
+      </Button>
     </div>
   );
 }
